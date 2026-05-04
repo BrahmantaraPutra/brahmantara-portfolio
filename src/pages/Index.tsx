@@ -5,7 +5,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   Smartphone, Monitor, Code2, Github, Mail, Linkedin, MapPin,
-  Rocket, Layers, Zap, Database, GitBranch, Wrench, ArrowRight, ExternalLink, Calendar, Sparkles, Image as ImageIcon
+  Rocket, Layers, Zap, Database, GitBranch, Wrench, ArrowRight, ExternalLink, Calendar, Sparkles, Image as ImageIcon,
+  Award, Trophy, GraduationCap, Instagram, Sun, Moon, BookOpen
 } from "lucide-react";
 
 const skills = [
@@ -45,10 +46,51 @@ const experience = [
   { role: "Android Developer", org: "Studi Independen / Proyek Akademik", period: "2021 — 2023", desc: "Mengembangkan beberapa aplikasi Android berbasis Kotlin dan Jetpack Compose dengan integrasi REST API dan Firebase." },
 ];
 
+const certificates = [
+  {
+    icon: Trophy,
+    title: "Juara 2 LKS Provinsi 2026",
+    org: "IT Software Solution for Business",
+    year: "2026",
+    desc: "Meraih Juara 2 tingkat Provinsi dalam Lomba Kompetensi Siswa cabang IT Software Solution for Business.",
+    highlight: true,
+  },
+  {
+    icon: Award,
+    title: "Sertifikat Kompetensi Mobile Developer",
+    org: "Pelatihan Mandiri",
+    year: "2025",
+    desc: "Penguasaan pengembangan aplikasi Android native menggunakan Kotlin & Jetpack Compose.",
+  },
+  {
+    icon: BookOpen,
+    title: "Flutter Cross-Platform Development",
+    org: "Online Course",
+    year: "2024",
+    desc: "Membangun aplikasi mobile cross-platform yang siap produksi dengan arsitektur clean.",
+  },
+];
+
 const Index = () => {
+  const [dark, setDark] = useState(false);
   useEffect(() => {
     document.title = "Brahmantara Putra Wirabhakti — Portfolio";
   }, []);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDark = saved ? saved === "dark" : prefersDark;
+    setDark(isDark);
+    document.documentElement.classList.toggle("dark", isDark);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = !dark;
+    setDark(next);
+    document.documentElement.classList.toggle("dark", next);
+    localStorage.setItem("theme", next ? "dark" : "light");
+  };
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -59,7 +101,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans">
+    <div className="min-h-screen bg-background text-foreground font-sans pb-28">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* Nav */}
@@ -69,7 +111,7 @@ const Index = () => {
             Brahmantara<span className="text-accent">.</span>
           </a>
           <ul className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-            {["About", "Tech", "Skills", "Projects", "Experience", "Contact"].map(i => (
+            {["About", "Tech", "Skills", "Projects", "Certificates", "Experience", "Contact"].map(i => (
               <li key={i}>
                 <a href={`#${i.toLowerCase()}`} className="story-link hover:text-foreground transition-colors">{i}</a>
               </li>
@@ -90,7 +132,7 @@ const Index = () => {
         <div className="container relative grid md:grid-cols-5 gap-12 items-center py-24 md:py-32">
           <div className="md:col-span-3 space-y-6 animate-fade-in">
             <Badge variant="secondary" className="rounded-full px-4 py-1.5 font-medium">
-              <span className="w-2 h-2 rounded-full bg-accent mr-2 animate-pulse" /> Personal Portfolio
+              <span className="w-2 h-2 rounded-full bg-accent mr-2 animate-pulse" /> Siswa SMK · Mencari Tempat Magang
             </Badge>
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
               Halo, saya{" "}
@@ -103,7 +145,7 @@ const Index = () => {
               .
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
-              Seorang <strong className="text-foreground">Mobile & Desktop Application Developer</strong> yang berdedikasi pada kualitas, performa, dan pengalaman pengguna. Selamat datang di ruang dokumentasi karya, perjalanan, dan keahlian saya.
+              Seorang <strong className="text-foreground">siswa SMK</strong> yang berfokus pada pengembangan aplikasi <strong className="text-foreground">mobile & desktop</strong>. Saat ini sedang mencari kesempatan <strong className="text-foreground">magang</strong> untuk mengasah keahlian di lingkungan kerja nyata. Selamat datang di ruang dokumentasi karya dan perjalanan belajar saya.
             </p>
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <Button asChild size="lg" variant="outline" className="hover-scale">
@@ -114,9 +156,9 @@ const Index = () => {
               </Button>
             </div>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-6 text-sm text-muted-foreground">
+              <span className="flex items-center gap-2"><GraduationCap className="h-4 w-4" /> Siswa SMK</span>
               <span className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Indonesia</span>
               <span className="flex items-center gap-2"><Code2 className="h-4 w-4" /> Mobile · Desktop</span>
-              <span className="flex items-center gap-2"><Sparkles className="h-4 w-4" /> Kotlin · Flutter · Avalonia · Tauri</span>
             </div>
           </div>
 
@@ -153,15 +195,15 @@ const Index = () => {
             </div>
             <div className="md:col-span-2 space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                Saya seorang pengembang aplikasi yang fokus pada ekosistem <strong className="text-foreground">mobile dan desktop</strong>. Selama beberapa tahun terakhir, saya membangun produk digital mulai dari aplikasi internal hingga produk konsumen lintas platform.
+                Saya seorang <strong className="text-foreground">siswa SMK</strong> jurusan IT yang antusias pada dunia pengembangan aplikasi <strong className="text-foreground">mobile dan desktop</strong>. Saya banyak belajar secara mandiri sambil mengikuti berbagai kompetensi dan kompetisi di sekolah.
               </p>
               <p>
-                Pendekatan saya: <em>clean architecture</em>, fokus pada performa, dan UI yang ramah pengguna. Stack favorit: Kotlin (Android), Flutter (cross-platform mobile), Avalonia (.NET desktop), serta Tauri (Rust) untuk solusi desktop ringan.
+                Saat ini saya sedang mencari kesempatan <strong className="text-foreground">magang (PKL)</strong> untuk menerapkan keahlian saya di lingkungan profesional. Stack favorit: Kotlin (Android), Flutter, Avalonia (.NET), serta Tauri (Rust) untuk desktop ringan.
               </p>
               <div className="grid grid-cols-3 gap-6 pt-6">
-                <Stat value="20+" label="Project selesai" />
-                <Stat value="4+" label="Tahun pengalaman" />
-                <Stat value="12+" label="Teknologi dikuasai" />
+                <Stat value="10+" label="Project belajar" />
+                <Stat value="3+" label="Tahun ngoding" />
+                <Stat value="12+" label="Teknologi dipelajari" />
               </div>
             </div>
           </div>
@@ -250,7 +292,7 @@ const Index = () => {
         <div className="container max-w-4xl">
           <div className="mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Experience</p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold">Pengalaman</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold">Pengalaman & Pendidikan</h2>
           </div>
           <div className="relative space-y-6 before:absolute before:left-4 before:top-2 before:bottom-2 before:w-px before:bg-border md:before:left-6">
             {experience.map(e => (
@@ -267,6 +309,38 @@ const Index = () => {
                   <p className="text-muted-foreground leading-relaxed">{e.desc}</p>
                 </Card>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Certificates */}
+      <section id="certificates" className="py-20 bg-secondary/40">
+        <div className="container">
+          <div className="max-w-2xl mb-14">
+            <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Achievements</p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Sertifikat & Penghargaan</h2>
+            <p className="text-muted-foreground">Beberapa pencapaian dan sertifikasi yang saya raih selama proses belajar.</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {certificates.map(c => (
+              <Card
+                key={c.title}
+                className={`group p-6 shadow-card border-border bg-card hover:-translate-y-1 hover:shadow-soft transition-all duration-300 relative overflow-hidden ${c.highlight ? "ring-2 ring-accent/40" : ""}`}
+              >
+                {c.highlight && (
+                  <div className="absolute top-0 right-0 bg-gradient-accent text-primary-foreground text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-bl-lg">
+                    Highlight
+                  </div>
+                )}
+                <div className="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-4 group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
+                  <c.icon className="h-6 w-6" />
+                </div>
+                <Badge variant="outline" className="mb-3 text-xs">{c.year}</Badge>
+                <h3 className="font-display font-bold text-lg mb-1.5 leading-snug">{c.title}</h3>
+                <p className="text-primary text-sm font-medium mb-2">{c.org}</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
+              </Card>
             ))}
           </div>
         </div>
@@ -294,6 +368,9 @@ const Index = () => {
           <p>Kotlin · Flutter · Avalonia · Tauri</p>
         </div>
       </footer>
+
+      {/* Floating dock */}
+      <FloatingDock dark={dark} toggleTheme={toggleTheme} />
     </div>
   );
 };
@@ -340,6 +417,43 @@ const TechCard = ({ tech, delay }: { tech: { name: string; category: string; img
       <div className="text-center relative">
         <div className="font-display font-semibold text-sm">{tech.name}</div>
         <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-0.5">{tech.category}</div>
+      </div>
+    </div>
+  );
+};
+
+const FloatingDock = ({ dark, toggleTheme }: { dark: boolean; toggleTheme: () => void }) => {
+  const items = [
+    { icon: Mail, label: "Email", href: "mailto:brahmantara@example.com" },
+    { icon: Github, label: "GitHub", href: "https://github.com" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com" },
+    { icon: Instagram, label: "Instagram", href: "https://instagram.com" },
+  ];
+  return (
+    <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 animate-fade-in">
+      <div className="flex items-center gap-1 p-1.5 rounded-full bg-card/90 backdrop-blur-md border border-border shadow-soft">
+        {items.map(it => (
+          <a
+            key={it.label}
+            href={it.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={it.label}
+            title={it.label}
+            className="group relative w-11 h-11 rounded-full flex items-center justify-center text-muted-foreground hover:text-accent-foreground hover:bg-accent transition-all duration-300 hover:scale-110"
+          >
+            <it.icon className="h-[18px] w-[18px]" />
+          </a>
+        ))}
+        <span className="w-px h-6 bg-border mx-1" />
+        <button
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+          title={dark ? "Mode terang" : "Mode gelap"}
+          className="group relative w-11 h-11 rounded-full flex items-center justify-center text-muted-foreground hover:text-accent-foreground hover:bg-accent transition-all duration-300 hover:scale-110"
+        >
+          {dark ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
+        </button>
       </div>
     </div>
   );
