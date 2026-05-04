@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import heroImg from "@/assets/hero-portrait.jpg";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   Smartphone, Monitor, Code2, Github, Mail, Linkedin, MapPin,
-  Rocket, Layers, Zap, Database, GitBranch, Wrench, ArrowRight, ExternalLink, Calendar
+  Rocket, Layers, Zap, Database, GitBranch, Wrench, ArrowRight, ExternalLink, Calendar, Sparkles, Image as ImageIcon
 } from "lucide-react";
 
 const skills = [
@@ -17,37 +17,27 @@ const skills = [
   { icon: GitBranch, name: "Git & CI/CD", level: "Proficient", desc: "Workflow Git, GitHub Actions, dan automation deployment multi-platform." },
 ];
 
-const projects = [
-  {
-    title: "FieldOps Mobile",
-    stack: ["Kotlin", "Jetpack Compose", "Room"],
-    desc: "Aplikasi Android untuk manajemen petugas lapangan dengan mode offline-first dan sinkronisasi otomatis ketika kembali online.",
-    year: "2025",
-  },
-  {
-    title: "Lumen Notes",
-    stack: ["Flutter", "Riverpod", "SQLite"],
-    desc: "Aplikasi catatan lintas platform (iOS & Android) dengan markdown editor, tag, dan pencarian cepat berbasis full-text index.",
-    year: "2024",
-  },
-  {
-    title: "Avalon Inventory",
-    stack: ["Avalonia", "C#", ".NET 8"],
-    desc: "Desktop app manajemen inventaris untuk Windows, macOS, dan Linux dengan reporting real-time dan sinkronisasi cloud.",
-    year: "2024",
-  },
-  {
-    title: "TauriDeck",
-    stack: ["Tauri", "Rust", "React"],
-    desc: "Dashboard analitik desktop ringan (<10MB) dengan komunikasi serial untuk hardware IoT dan visualisasi data interaktif.",
-    year: "2023",
-  },
+// User akan menambahkan image sendiri ke /public/tech/<file>.png — fallback pakai placeholder.
+const techStack = [
+  { name: "Kotlin", category: "Mobile", img: "/tech/kotlin.png" },
+  { name: "Flutter", category: "Mobile", img: "/tech/flutter.png" },
+  { name: "Dart", category: "Language", img: "/tech/dart.png" },
+  { name: "Jetpack Compose", category: "Mobile UI", img: "/tech/compose.png" },
+  { name: "Avalonia", category: "Desktop", img: "/tech/avalonia.png" },
+  { name: "Tauri", category: "Desktop", img: "/tech/tauri.png" },
+  { name: "C# / .NET", category: "Language", img: "/tech/csharp.png" },
+  { name: "Rust", category: "Language", img: "/tech/rust.png" },
+  { name: "Firebase", category: "Backend", img: "/tech/firebase.png" },
+  { name: "SQLite", category: "Database", img: "/tech/sqlite.png" },
+  { name: "Git", category: "Tools", img: "/tech/git.png" },
+  { name: "Figma", category: "Design", img: "/tech/figma.png" },
 ];
 
-const services = [
-  { icon: Smartphone, title: "Mobile Development", desc: "Pengembangan aplikasi Android native (Kotlin) dan cross-platform (Flutter) yang scalable dan production-ready." },
-  { icon: Monitor, title: "Desktop Application", desc: "Membangun aplikasi desktop modern dengan Avalonia (.NET) atau Tauri (Rust) untuk Windows, macOS, dan Linux." },
-  { icon: Wrench, title: "Maintenance & Refactoring", desc: "Audit codebase, refactor arsitektur, peningkatan performa, dan migrasi teknologi untuk aplikasi yang sudah berjalan." },
+const projects = [
+  { title: "FieldOps Mobile", stack: ["Kotlin", "Jetpack Compose", "Room"], desc: "Aplikasi Android untuk manajemen petugas lapangan dengan mode offline-first dan sinkronisasi otomatis ketika kembali online.", year: "2025" },
+  { title: "Lumen Notes", stack: ["Flutter", "Riverpod", "SQLite"], desc: "Aplikasi catatan lintas platform (iOS & Android) dengan markdown editor, tag, dan pencarian cepat berbasis full-text index.", year: "2024" },
+  { title: "Avalon Inventory", stack: ["Avalonia", "C#", ".NET 8"], desc: "Desktop app manajemen inventaris untuk Windows, macOS, dan Linux dengan reporting real-time dan sinkronisasi cloud.", year: "2024" },
+  { title: "TauriDeck", stack: ["Tauri", "Rust", "React"], desc: "Dashboard analitik desktop ringan (<10MB) dengan komunikasi serial untuk hardware IoT dan visualisasi data interaktif.", year: "2023" },
 ];
 
 const experience = [
@@ -57,7 +47,7 @@ const experience = [
 
 const Index = () => {
   useEffect(() => {
-    document.title = "Brahmantara Putra Wirabhakti — Mobile & Desktop Developer";
+    document.title = "Brahmantara Putra Wirabhakti — Portfolio";
   }, []);
 
   const jsonLd = {
@@ -65,7 +55,7 @@ const Index = () => {
     "@type": "Person",
     name: "Brahmantara Putra Wirabhakti",
     jobTitle: "Mobile & Desktop Application Developer",
-    knowsAbout: ["Kotlin", "Flutter", "Avalonia", "Tauri", "Mobile Development", "Desktop Development"],
+    knowsAbout: ["Kotlin", "Flutter", "Avalonia", "Tauri"],
   };
 
   return (
@@ -79,51 +69,76 @@ const Index = () => {
             Brahmantara<span className="text-accent">.</span>
           </a>
           <ul className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-            {["About", "Skills", "Projects", "Experience", "Contact"].map(i => (
-              <li key={i}><a href={`#${i.toLowerCase()}`} className="hover:text-foreground transition-colors">{i}</a></li>
+            {["About", "Tech", "Skills", "Projects", "Experience", "Contact"].map(i => (
+              <li key={i}>
+                <a href={`#${i.toLowerCase()}`} className="story-link hover:text-foreground transition-colors">{i}</a>
+              </li>
             ))}
           </ul>
-          <Button asChild size="sm" variant="default">
-            <a href="#contact">Hire Me</a>
-          </Button>
+          <Badge variant="outline" className="hidden sm:flex gap-1.5 rounded-full">
+            <Sparkles className="h-3 w-3 text-accent" /> Portfolio
+          </Badge>
         </nav>
       </header>
 
-      {/* Hero */}
-      <section id="home" className="bg-gradient-hero">
-        <div className="container grid md:grid-cols-2 gap-12 items-center py-20 md:py-28">
-          <div className="space-y-6">
+      {/* HERO — fokus profil */}
+      <section id="home" className="relative overflow-hidden bg-gradient-hero">
+        <div className="absolute inset-0 opacity-[0.08] [background-image:radial-gradient(hsl(var(--foreground))_1px,transparent_1px)] [background-size:24px_24px]" />
+        <div className="absolute -top-32 -right-32 w-96 h-96 bg-accent/20 rounded-full blur-3xl animate-[pulse_6s_ease-in-out_infinite]" />
+        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-primary/15 rounded-full blur-3xl animate-[pulse_8s_ease-in-out_infinite]" />
+
+        <div className="container relative grid md:grid-cols-5 gap-12 items-center py-24 md:py-32">
+          <div className="md:col-span-3 space-y-6 animate-fade-in">
             <Badge variant="secondary" className="rounded-full px-4 py-1.5 font-medium">
-              <span className="w-2 h-2 rounded-full bg-accent mr-2 animate-pulse" /> Available for new projects
+              <span className="w-2 h-2 rounded-full bg-accent mr-2 animate-pulse" /> Personal Portfolio
             </Badge>
-            <h1 className="font-display text-4xl md:text-6xl font-bold leading-tight tracking-tight">
-              Membangun aplikasi <span className="text-primary">mobile</span> & <span className="text-accent">desktop</span> yang elegan dan andal.
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
+              Halo, saya{" "}
+              <span className="relative inline-block">
+                <span className="relative z-10 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Brahmantara
+                </span>
+                <span className="absolute inset-x-0 bottom-1 h-3 bg-accent/20 -z-0" />
+              </span>
+              .
             </h1>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
-              Halo, saya <strong className="text-foreground">Brahmantara Putra Wirabhakti</strong> — software developer berfokus pada Kotlin, Flutter, Avalonia, dan Tauri untuk menghadirkan produk digital lintas platform.
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl">
+              Seorang <strong className="text-foreground">Mobile & Desktop Application Developer</strong> yang berdedikasi pada kualitas, performa, dan pengalaman pengguna. Selamat datang di ruang dokumentasi karya, perjalanan, dan keahlian saya.
             </p>
-            <div className="flex flex-wrap gap-3">
-              <Button asChild size="lg">
-                <a href="#projects">Lihat Project <ArrowRight className="ml-2 h-4 w-4" /></a>
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <Button asChild size="lg" variant="outline" className="hover-scale">
+                <a href="#tech">Lihat Tech Stack <ArrowRight className="ml-2 h-4 w-4" /></a>
               </Button>
-              <Button asChild size="lg" variant="outline">
-                <a href="#contact">Hubungi Saya</a>
+              <Button asChild size="lg" variant="ghost">
+                <a href="#projects">Jelajahi Project</a>
               </Button>
             </div>
-            <div className="flex items-center gap-6 pt-4 text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-6 text-sm text-muted-foreground">
               <span className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Indonesia</span>
-              <span className="flex items-center gap-2"><Code2 className="h-4 w-4" /> 4+ tahun pengalaman</span>
+              <span className="flex items-center gap-2"><Code2 className="h-4 w-4" /> Mobile · Desktop</span>
+              <span className="flex items-center gap-2"><Sparkles className="h-4 w-4" /> Kotlin · Flutter · Avalonia · Tauri</span>
             </div>
           </div>
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-accent opacity-20 blur-3xl rounded-full" />
-            <img
-              src={heroImg}
-              alt="Ilustrasi profil Brahmantara Putra Wirabhakti, mobile dan desktop developer"
-              width={1024}
-              height={1024}
-              className="relative rounded-3xl shadow-soft w-full max-w-md mx-auto"
-            />
+
+          <div className="md:col-span-2 relative animate-scale-in">
+            <div className="absolute -inset-6 bg-gradient-accent opacity-25 blur-3xl rounded-full" />
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-tr from-primary via-accent to-primary rounded-3xl opacity-60 blur-sm group-hover:opacity-100 transition-opacity" />
+              <img
+                src={heroImg}
+                alt="Foto profil Brahmantara Putra Wirabhakti"
+                width={1024}
+                height={1024}
+                className="relative rounded-3xl shadow-soft w-full max-w-sm mx-auto transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+              <div className="absolute -bottom-4 -left-4 bg-card border border-border rounded-2xl shadow-soft px-4 py-3 flex items-center gap-3 animate-fade-in">
+                <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+                <div className="text-xs">
+                  <div className="font-semibold">Currently Building</div>
+                  <div className="text-muted-foreground">Mobile & Desktop apps</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -138,38 +153,33 @@ const Index = () => {
             </div>
             <div className="md:col-span-2 space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                Saya seorang pengembang aplikasi yang fokus pada ekosistem <strong className="text-foreground">mobile dan desktop</strong>. Selama beberapa tahun terakhir, saya membangun produk digital mulai dari aplikasi internal perusahaan hingga produk konsumen lintas platform.
+                Saya seorang pengembang aplikasi yang fokus pada ekosistem <strong className="text-foreground">mobile dan desktop</strong>. Selama beberapa tahun terakhir, saya membangun produk digital mulai dari aplikasi internal hingga produk konsumen lintas platform.
               </p>
               <p>
-                Pendekatan saya: <em>clean architecture</em>, fokus pada performa, dan UI yang ramah pengguna. Saya percaya teknologi terbaik adalah yang paling sesuai dengan kebutuhan — itulah mengapa saya bekerja dengan beragam stack: Kotlin untuk Android native, Flutter untuk lintas platform, Avalonia untuk .NET desktop, dan Tauri untuk solusi desktop ringan berbasis Rust.
+                Pendekatan saya: <em>clean architecture</em>, fokus pada performa, dan UI yang ramah pengguna. Stack favorit: Kotlin (Android), Flutter (cross-platform mobile), Avalonia (.NET desktop), serta Tauri (Rust) untuk solusi desktop ringan.
               </p>
               <div className="grid grid-cols-3 gap-6 pt-6">
                 <Stat value="20+" label="Project selesai" />
                 <Stat value="4+" label="Tahun pengalaman" />
-                <Stat value="15+" label="Klien puas" />
+                <Stat value="12+" label="Teknologi dikuasai" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section className="py-20 bg-secondary/40">
+      {/* TECH STACK */}
+      <section id="tech" className="py-20 bg-secondary/40 relative overflow-hidden">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Services</p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Apa yang Saya Tawarkan</h2>
-            <p className="text-muted-foreground">Solusi pengembangan aplikasi end-to-end, dari ide hingga rilis ke production.</p>
+            <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Tech Stack</p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Teknologi yang Saya Gunakan</h2>
+            <p className="text-muted-foreground">Sekumpulan tools, bahasa, dan framework yang menjadi keseharian saya dalam membangun produk.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {services.map(s => (
-              <Card key={s.title} className="p-7 shadow-card hover:shadow-soft transition-all border-border bg-card">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-5">
-                  <s.icon className="h-6 w-6" />
-                </div>
-                <h3 className="font-display font-bold text-xl mb-2">{s.title}</h3>
-                <p className="text-muted-foreground leading-relaxed text-sm">{s.desc}</p>
-              </Card>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {techStack.map((t, i) => (
+              <TechCard key={t.name} tech={t} delay={i * 40} />
             ))}
           </div>
         </div>
@@ -181,13 +191,13 @@ const Index = () => {
           <div className="max-w-2xl mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Skills</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Keahlian Teknis</h2>
-            <p className="text-muted-foreground">Stack teknologi yang saya gunakan setiap hari untuk membangun produk berkualitas.</p>
+            <p className="text-muted-foreground">Bidang keahlian utama dengan tingkat penguasaan masing-masing.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {skills.map(s => (
-              <Card key={s.name} className="p-6 shadow-card border-border bg-card hover:-translate-y-1 transition-transform">
+              <Card key={s.name} className="group p-6 shadow-card border-border bg-card hover:-translate-y-1 hover:shadow-soft transition-all duration-300 cursor-default">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-11 h-11 rounded-lg bg-accent/10 text-accent flex items-center justify-center">
+                  <div className="w-11 h-11 rounded-lg bg-accent/10 text-accent flex items-center justify-center group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
                     <s.icon className="h-5 w-5" />
                   </div>
                   <Badge variant="outline" className="text-xs">{s.level}</Badge>
@@ -212,9 +222,9 @@ const Index = () => {
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             {projects.map(p => (
-              <Card key={p.title} className="p-7 shadow-card hover:shadow-soft transition-all border-border bg-card group">
+              <Card key={p.title} className="p-7 shadow-card hover:shadow-soft transition-all duration-300 border-border bg-card group hover:-translate-y-1">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-accent flex items-center justify-center text-primary-foreground">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-accent flex items-center justify-center text-primary-foreground group-hover:scale-110 transition-transform">
                     <Rocket className="h-5 w-5" />
                   </div>
                   <span className="text-sm text-muted-foreground flex items-center gap-1.5">
@@ -226,7 +236,7 @@ const Index = () => {
                 <div className="flex flex-wrap gap-2 mb-5">
                   {p.stack.map(t => <Badge key={t} variant="secondary" className="font-normal">{t}</Badge>)}
                 </div>
-                <a href="#contact" className="inline-flex items-center text-sm font-medium text-primary hover:text-accent transition-colors">
+                <a href="#contact" className="story-link inline-flex items-center text-sm font-medium text-primary">
                   Lihat detail <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
                 </a>
               </Card>
@@ -242,18 +252,21 @@ const Index = () => {
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Experience</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold">Pengalaman</h2>
           </div>
-          <div className="space-y-6">
+          <div className="relative space-y-6 before:absolute before:left-4 before:top-2 before:bottom-2 before:w-px before:bg-border md:before:left-6">
             {experience.map(e => (
-              <Card key={e.role} className="p-7 shadow-card border-border bg-card">
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
-                  <div>
-                    <h3 className="font-display font-bold text-lg">{e.role}</h3>
-                    <p className="text-primary font-medium text-sm">{e.org}</p>
+              <div key={e.role} className="relative pl-12 md:pl-16">
+                <span className="absolute left-2 top-6 w-5 h-5 rounded-full bg-gradient-accent ring-4 ring-background md:left-4" />
+                <Card className="p-6 shadow-card border-border bg-card hover:shadow-soft transition-all">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
+                    <div>
+                      <h3 className="font-display font-bold text-lg">{e.role}</h3>
+                      <p className="text-primary font-medium text-sm">{e.org}</p>
+                    </div>
+                    <Badge variant="outline" className="self-start">{e.period}</Badge>
                   </div>
-                  <Badge variant="outline" className="self-start">{e.period}</Badge>
-                </div>
-                <p className="text-muted-foreground leading-relaxed">{e.desc}</p>
-              </Card>
+                  <p className="text-muted-foreground leading-relaxed">{e.desc}</p>
+                </Card>
+              </div>
             ))}
           </div>
         </div>
@@ -263,25 +276,22 @@ const Index = () => {
       <section id="contact" className="py-20 md:py-28 bg-gradient-hero">
         <div className="container max-w-3xl text-center">
           <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Get in Touch</p>
-          <h2 className="font-display text-3xl md:text-5xl font-bold mb-5">Mari Berkolaborasi</h2>
+          <h2 className="font-display text-3xl md:text-5xl font-bold mb-5">Mari Terhubung</h2>
           <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
-            Punya ide aplikasi mobile atau desktop? Saya siap membantu mewujudkannya dari konsep hingga rilis.
+            Tertarik berdiskusi soal teknologi mobile, desktop, atau sekadar menyapa? Jangan ragu untuk menghubungi saya melalui kanal di bawah.
           </p>
-          <div className="grid sm:grid-cols-3 gap-4 mb-10">
+          <div className="grid sm:grid-cols-3 gap-4">
             <ContactCard icon={Mail} label="Email" value="brahmantara@example.com" href="mailto:brahmantara@example.com" />
             <ContactCard icon={Github} label="GitHub" value="@brahmantara" href="https://github.com" />
             <ContactCard icon={Linkedin} label="LinkedIn" value="Brahmantara P.W." href="https://linkedin.com" />
           </div>
-          <Button asChild size="lg">
-            <a href="mailto:brahmantara@example.com">Kirim Email <Mail className="ml-2 h-4 w-4" /></a>
-          </Button>
         </div>
       </section>
 
       <footer className="border-t border-border py-8">
         <div className="container flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Brahmantara Putra Wirabhakti. All rights reserved.</p>
-          <p>Built with care — Kotlin · Flutter · Avalonia · Tauri</p>
+          <p>© {new Date().getFullYear()} Brahmantara Putra Wirabhakti.</p>
+          <p>Kotlin · Flutter · Avalonia · Tauri</p>
         </div>
       </footer>
     </div>
@@ -297,11 +307,42 @@ const Stat = ({ value, label }: { value: string; label: string }) => (
 
 const ContactCard = ({ icon: Icon, label, value, href }: any) => (
   <a href={href} target="_blank" rel="noopener noreferrer"
-    className="group p-5 rounded-xl bg-card border border-border shadow-card hover:shadow-soft hover:-translate-y-0.5 transition-all">
-    <Icon className="h-5 w-5 text-accent mx-auto mb-2" />
+    className="group p-5 rounded-xl bg-card border border-border shadow-card hover:shadow-soft hover:-translate-y-1 transition-all duration-300">
+    <Icon className="h-5 w-5 text-accent mx-auto mb-2 group-hover:scale-110 transition-transform" />
     <div className="text-xs text-muted-foreground uppercase tracking-wider">{label}</div>
     <div className="font-medium text-sm mt-1 group-hover:text-primary transition-colors truncate">{value}</div>
   </a>
 );
+
+const TechCard = ({ tech, delay }: { tech: { name: string; category: string; img: string }; delay: number }) => {
+  const [errored, setErrored] = useState(false);
+  return (
+    <div
+      style={{ animationDelay: `${delay}ms` }}
+      className="group relative aspect-square rounded-2xl bg-card border border-border shadow-card hover:shadow-soft hover:-translate-y-1 hover:border-accent/40 transition-all duration-300 cursor-default animate-fade-in flex flex-col items-center justify-center p-4 overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-gradient-accent opacity-0 group-hover:opacity-[0.06] transition-opacity" />
+      <div className="relative w-12 h-12 md:w-14 md:h-14 mb-3 flex items-center justify-center">
+        {!errored ? (
+          <img
+            src={tech.img}
+            alt={`${tech.name} logo`}
+            loading="lazy"
+            onError={() => setErrored(true)}
+            className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
+          />
+        ) : (
+          <div className="w-full h-full rounded-xl bg-muted flex items-center justify-center text-muted-foreground">
+            <ImageIcon className="h-6 w-6" />
+          </div>
+        )}
+      </div>
+      <div className="text-center relative">
+        <div className="font-display font-semibold text-sm">{tech.name}</div>
+        <div className="text-[10px] uppercase tracking-wider text-muted-foreground mt-0.5">{tech.category}</div>
+      </div>
+    </div>
+  );
+};
 
 export default Index;
