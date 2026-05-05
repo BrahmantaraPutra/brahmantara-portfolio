@@ -422,8 +422,8 @@ const FloatingDock = ({ dark, toggleTheme }: { dark: boolean; toggleTheme: () =>
     { icon: Instagram, label: "Instagram", href: "https://instagram.com" },
   ];
   return (
-    <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 animate-fade-in">
-      <div className="flex items-center gap-1 p-1.5 rounded-full bg-card/90 backdrop-blur-md border border-border shadow-soft">
+    <div className="fixed bottom-5 inset-x-0 z-50 flex justify-center pointer-events-none animate-fade-in">
+      <div className="pointer-events-auto flex items-center gap-1 p-1.5 rounded-full bg-card/90 backdrop-blur-md border border-border shadow-soft">
         {items.map(it => (
           <a
             key={it.label}
