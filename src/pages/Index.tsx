@@ -16,7 +16,7 @@ const skills = [
   { icon: Layers, name: "Flutter & Dart", level: "Expert", desc: "Cross-platform mobile apps dengan performa native dan UI yang konsisten." },
   { icon: Monitor, name: "Avalonia UI (.NET)", level: "Advanced", desc: "Aplikasi desktop cross-platform berbasis C# dengan arsitektur MVVM." },
   { icon: Zap, name: "Tauri (Rust)", level: "Advanced", desc: "Desktop app ringan dan cepat menggunakan web frontend & backend Rust." },
-  { icon: Database, name: "Database & API", level: "Proficient", desc: "SQLite, Room, Firebase, REST & GraphQL untuk integrasi data yang andal." },
+  { icon: Database, name: "Database & API", level: "Proficient", desc: "SQLite, Room, Supabase, SQLserver, REST & GraphQL untuk integrasi data yang andal." },
   { icon: GitBranch, name: "Git & CI/CD", level: "Proficient", desc: "Workflow Git, GitHub Actions, dan automation deployment multi-platform." },
 ];
 
@@ -30,22 +30,41 @@ const techStack = [
   { name: "Tauri", category: "Desktop", img: "/tech/tauri.svg" },
   { name: "C# / .NET", category: "Language", img: "/tech/csharp.svg" },
   { name: "Rust", category: "Language", img: "/tech/rust.svg" },
-  { name: "Firebase", category: "Backend", img: "/tech/firebase.svg" },
+  { name: "Supabase", category: "Backend", img: "/tech/firebase.svg" },
   { name: "SQLite", category: "Database", img: "/tech/sqlite.svg" },
   { name: "Git", category: "Tools", img: "/tech/git.svg" },
-  { name: "Figma", category: "Design", img: "/tech/figma.svg" },
+  { name: "SQLserver", category: "Database", img: "/tech/figma.svg" },
 ];
 
 const projects = [
-  { title: "FieldOps Mobile", stack: ["Kotlin", "Jetpack Compose", "Room"], desc: "Aplikasi Android untuk manajemen petugas lapangan dengan mode offline-first dan sinkronisasi otomatis ketika kembali online.", year: "2025" },
-  { title: "Lumen Notes", stack: ["Flutter", "Riverpod", "SQLite"], desc: "Aplikasi catatan lintas platform (iOS & Android) dengan markdown editor, tag, dan pencarian cepat berbasis full-text index.", year: "2024" },
-  { title: "Avalon Inventory", stack: ["Avalonia", "C#", ".NET 8"], desc: "Desktop app manajemen inventaris untuk Windows, macOS, dan Linux dengan reporting real-time dan sinkronisasi cloud.", year: "2024" },
-  { title: "TauriDeck", stack: ["Tauri", "Rust", "React"], desc: "Dashboard analitik desktop ringan (<10MB) dengan komunikasi serial untuk hardware IoT dan visualisasi data interaktif.", year: "2023" },
+  { 
+    title: "SmithOrigin", 
+    stack: ["Avalonia UI", "C#", ".NET 10", "Tauri"], 
+    desc: "Aplikasi desktop cross-platform yang berfokus pada efisiensi performa, dikembangkan dari WinForms menuju arsitektur Avalonia modern.", 
+    year: "2026" 
+  },
+  { 
+    title: "Esemka Management System", 
+    stack: ["C#", "SQL Server", "WinForms"], 
+    desc: "Simulasi modul kompetisi LKS ITSSB untuk manajemen operasional bisnis dengan integrasi basis data relasional yang kompleks.", 
+    year: "2026" 
+  },
+  { 
+    title: "Ezemkofe (Mobile)", 
+    stack: ["Kotlin", "Jetpack Compose", "Retrofit"], 
+    desc: "Aplikasi Android native untuk manajemen inventaris dan transaksi sebuah kafe, menggunakan arsitektur MVVM dan integrasi REST API.", 
+    year: "2026" 
+  },
+  { 
+    title: "Ecopedia", 
+    stack: ["React", "Supabase", "Typescript"], 
+    desc: "Website untuk mengelola, mengatur, dan mendistribusikan aktivitas peduli lingkungan masyarakat dengan sebuah organisasi.", 
+    year: "2025" 
+  },
 ];
 
 const experience = [
-  { role: "Mobile & Desktop Developer", org: "Freelance / Independent", period: "2023 — Sekarang", desc: "Membangun beragam aplikasi mobile dan desktop untuk klien lokal dan internasional dengan fokus pada UX dan performa." },
-  { role: "Android Developer", org: "Studi Independen / Proyek Akademik", period: "2021 — 2023", desc: "Mengembangkan beberapa aplikasi Android berbasis Kotlin dan Jetpack Compose dengan integrasi REST API dan Firebase." },
+  { role: "SMK NEGERI 2 YOGYAKARTA", org: "Sistem Informasi Jaringan dan Aplikasi", period: "2023 — Sekarang", desc: "Membangun beragam aplikasi mobile dan desktop untuk klien lokal dan internasional dengan fokus pada UX dan performa." },
 ];
 
 const certificates = [
@@ -59,17 +78,17 @@ const certificates = [
   },
   {
     icon: Award,
-    title: "Sertifikat Kompetensi Mobile Developer",
-    org: "Pelatihan Mandiri",
+    title: "Finalis Lomba PMB UNIKU",
+    org: "Web Design",
     year: "2025",
-    desc: "Penguasaan pengembangan aplikasi Android native menggunakan Kotlin & Jetpack Compose.",
+    desc: "Menjadi finalis dalam lomba mmebangun dan mendesain sebuah webite bertema peduli lingkungan.",
   },
   {
     icon: BookOpen,
-    title: "Flutter Cross-Platform Development",
+    title: "MTCNA",
     org: "Online Course",
-    year: "2024",
-    desc: "Membangun aplikasi mobile cross-platform yang siap produksi dengan arsitektur clean.",
+    year: "2025",
+    desc: "sertifikasi resmi dari MikroTik untuk mengkonfigurasi, mengelola, dan menggunakan MikroTik RouterOS",
   },
 ];
 
@@ -225,7 +244,7 @@ const Index = () => {
                 Saat ini saya sedang mencari kesempatan <strong className="text-foreground">magang (PKL)</strong> untuk menerapkan keahlian saya di lingkungan profesional. Stack favorit: Kotlin (Android), Flutter, Avalonia (.NET), serta Tauri (Rust) untuk desktop ringan.
               </p>
               <div className="grid grid-cols-3 gap-6 pt-6">
-                <Stat value="10+" label="Project belajar" />
+                <Stat value="10+" label="Project" />
                 <Stat value="3+" label="Tahun belajar" />
                 <Stat value="12+" label="Teknologi dipelajari" />
               </div>
@@ -284,7 +303,7 @@ const Index = () => {
           <Reveal variant="up" className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
             <div className="max-w-2xl">
               <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Selected Work</p>
-              <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Project Pilihan</h2>
+              <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Pengalaman Project</h2>
               <p className="text-muted-foreground">Beberapa karya yang merepresentasikan keahlian dan pendekatan kerja saya.</p>
             </div>
           </Reveal>
@@ -320,7 +339,7 @@ const Index = () => {
         <div className="container max-w-4xl">
           <Reveal variant="up" className="mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Experience</p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold">Pengalaman & Pendidikan</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold">Jenjang Pendidikan</h2>
           </Reveal>
           <div className="relative space-y-6 before:absolute before:left-4 before:top-2 before:bottom-2 before:w-px before:bg-border md:before:left-6">
             {experience.map((e, i) => (
@@ -384,9 +403,9 @@ const Index = () => {
             Tertarik berdiskusi soal teknologi mobile, desktop, atau sekadar menyapa? Jangan ragu untuk menghubungi saya melalui kanal di bawah.
           </p>
           <div className="grid sm:grid-cols-3 gap-4">
-            <ContactCard icon={Mail} label="Email" value="brahmantara@example.com" href="mailto:brahmantara@example.com" />
-            <ContactCard icon={Github} label="GitHub" value="@brahmantara" href="https://github.com" />
-            <ContactCard icon={Linkedin} label="LinkedIn" value="Brahmantara P.W." href="https://linkedin.com" />
+            <ContactCard icon={Mail} label="Email" value="brahmantaraputraw@gmail.com" href="mailto:brahmantaraputraw@gmail.com" />
+            <ContactCard icon={Github} label="GitHub" value="@BrahmantaraPutra" href="https://github.com/BrahmantaraPutra" />
+            <ContactCard icon={Linkedin} label="LinkedIn" value="Brahmantara P.W." href="https://www.linkedin.com/in/brahmantara-putra-wirabhakti-55128736b/" />
           </div>
         </Reveal>
       </section>
@@ -394,7 +413,7 @@ const Index = () => {
       <footer className="border-t border-border py-8">
         <div className="container flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-muted-foreground">
           <p>© {new Date().getFullYear()} Brahmantara Putra Wirabhakti.</p>
-          <p>Kotlin · Flutter · Avalonia · Tauri</p>
+          <p>Portofolio</p>
         </div>
       </footer>
 
@@ -490,10 +509,10 @@ const TechCard = ({ tech, delay }: { tech: { name: string; category: string; img
 
 const FloatingDock = ({ dark, toggleTheme }: { dark: boolean; toggleTheme: () => void }) => {
   const items = [
-    { icon: Mail, label: "Email", href: "mailto:brahmantara@example.com" },
-    { icon: Github, label: "GitHub", href: "https://github.com" },
-    { icon: Linkedin, label: "LinkedIn", href: "https://linkedin.com" },
-    { icon: Instagram, label: "Instagram", href: "https://instagram.com" },
+    { icon: Mail, label: "Email", href: "mailto:brahmantaraputtraw@gmail.com" },
+    { icon: Github, label: "GitHub", href: "https://github.com/BrahmantaraPutra" },
+    { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/brahmantara-putra-wirabhakti-55128736b/" },
+    { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/searchforoutra?igsh=eG51NzcxZGIzMXlx" },
   ];
   return (
     <div className="fixed bottom-5 inset-x-0 z-50 flex justify-center pointer-events-none animate-fade-in">
