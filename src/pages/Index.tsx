@@ -406,6 +406,43 @@ const Stat = ({ value, label }: { value: string; label: string }) => (
   </div>
 );
 
+type RevealVariant = "up" | "left" | "right" | "fade";
+
+const Reveal = ({
+  children,
+  variant = "up",
+  delay = 0,
+  className,
+  as: As = "div",
+}: {
+  children: React.ReactNode;
+  variant?: RevealVariant;
+  delay?: number;
+  className?: string;
+  as?: any;
+}) => {
+  const { ref, visible } = useReveal<HTMLDivElement>();
+  const animMap: Record<RevealVariant, string> = {
+    up: "animate-slide-up",
+    left: "animate-slide-in-left",
+    right: "animate-slide-in-right",
+    fade: "animate-fade-in",
+  };
+  return (
+    <As
+      ref={ref}
+      style={{ animationDelay: visible ? `${delay}ms` : undefined }}
+      className={cn(
+        "transition-opacity",
+        visible ? animMap[variant] : "opacity-0",
+        className,
+      )}
+    >
+      {children}
+    </As>
+  );
+};
+
 const ContactCard = ({ icon: Icon, label, value, href }: any) => (
   <a href={href} target="_blank" rel="noopener noreferrer"
     className="group p-5 rounded-xl bg-card border border-border shadow-card hover:shadow-soft hover:-translate-y-1 transition-all duration-300">
