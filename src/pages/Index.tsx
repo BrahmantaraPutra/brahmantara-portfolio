@@ -213,11 +213,11 @@ const Index = () => {
       <section id="about" className="py-20 md:py-28">
         <div className="container max-w-5xl">
           <div className="grid md:grid-cols-3 gap-12">
-            <div>
+            <Reveal variant="left">
               <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">About</p>
               <h2 className="font-display text-3xl md:text-4xl font-bold">Tentang Saya</h2>
-            </div>
-            <div className="md:col-span-2 space-y-4 text-muted-foreground leading-relaxed">
+            </Reveal>
+            <Reveal variant="right" delay={120} className="md:col-span-2 space-y-4 text-muted-foreground leading-relaxed">
               <p>
                 Saya seorang <strong className="text-foreground">siswa SMK</strong> jurusan IT yang antusias pada dunia pengembangan aplikasi <strong className="text-foreground">mobile dan desktop</strong>. Saya banyak belajar secara mandiri sambil mengikuti berbagai kompetensi dan kompetisi di sekolah.
               </p>
@@ -229,7 +229,7 @@ const Index = () => {
                 <Stat value="3+" label="Tahun ngoding" />
                 <Stat value="12+" label="Teknologi dipelajari" />
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -237,11 +237,11 @@ const Index = () => {
       {/* TECH STACK */}
       <section id="tech" className="py-20 bg-secondary/40 relative overflow-hidden">
         <div className="container">
-          <div className="text-center max-w-2xl mx-auto mb-14">
+          <Reveal variant="up" className="text-center max-w-2xl mx-auto mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Tech Stack</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Teknologi yang Saya Gunakan</h2>
             <p className="text-muted-foreground">Sekumpulan tools, bahasa, dan framework yang menjadi keseharian saya dalam membangun produk.</p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {techStack.map((t, i) => (
@@ -254,16 +254,17 @@ const Index = () => {
       {/* Skills */}
       <section id="skills" className="py-20 md:py-28">
         <div className="container">
-          <div className="max-w-2xl mb-14">
+          <Reveal variant="up" className="max-w-2xl mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Skills</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Keahlian Teknis</h2>
             <p className="text-muted-foreground">Bidang keahlian utama dengan tingkat penguasaan masing-masing.</p>
-          </div>
+          </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {skills.map(s => (
-              <Card key={s.name} className="group p-6 shadow-card border-border bg-card hover:-translate-y-1 hover:shadow-soft transition-all duration-300 cursor-default">
+            {skills.map((s, i) => (
+              <Reveal key={s.name} variant="up" delay={i * 80}>
+              <Card className="group p-6 shadow-card border-border bg-card hover:-translate-y-1 hover:shadow-soft transition-all duration-300 cursor-default">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-11 h-11 rounded-lg bg-accent/10 text-accent flex items-center justify-center group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
+                  <div className="w-11 h-11 rounded-lg bg-accent/10 text-accent flex items-center justify-center group-hover:bg-accent group-hover:text-accent-foreground group-hover:rotate-6 transition-all duration-300">
                     <s.icon className="h-5 w-5" />
                   </div>
                   <Badge variant="outline" className="text-xs">{s.level}</Badge>
@@ -271,6 +272,7 @@ const Index = () => {
                 <h3 className="font-display font-semibold text-lg mb-1.5">{s.name}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
               </Card>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -279,16 +281,17 @@ const Index = () => {
       {/* Projects */}
       <section id="projects" className="py-20 bg-secondary/40">
         <div className="container">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+          <Reveal variant="up" className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
             <div className="max-w-2xl">
               <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Selected Work</p>
               <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Project Pilihan</h2>
               <p className="text-muted-foreground">Beberapa karya yang merepresentasikan keahlian dan pendekatan kerja saya.</p>
             </div>
-          </div>
+          </Reveal>
           <div className="grid md:grid-cols-2 gap-6">
-            {projects.map(p => (
-              <Card key={p.title} className="p-7 shadow-card hover:shadow-soft transition-all duration-300 border-border bg-card group hover:-translate-y-1">
+            {projects.map((p, i) => (
+              <Reveal key={p.title} variant={i % 2 === 0 ? "left" : "right"} delay={i * 100}>
+              <Card className="p-7 shadow-card hover:shadow-soft transition-all duration-300 border-border bg-card group hover:-translate-y-1">
                 <div className="flex items-start justify-between mb-4">
                   <div className="w-12 h-12 rounded-xl bg-gradient-accent flex items-center justify-center text-primary-foreground group-hover:scale-110 transition-transform">
                     <Rocket className="h-5 w-5" />
@@ -306,6 +309,7 @@ const Index = () => {
                   Lihat detail <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
                 </a>
               </Card>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -314,13 +318,13 @@ const Index = () => {
       {/* Experience */}
       <section id="experience" className="py-20 md:py-28">
         <div className="container max-w-4xl">
-          <div className="mb-14">
+          <Reveal variant="up" className="mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Experience</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold">Pengalaman & Pendidikan</h2>
-          </div>
+          </Reveal>
           <div className="relative space-y-6 before:absolute before:left-4 before:top-2 before:bottom-2 before:w-px before:bg-border md:before:left-6">
-            {experience.map(e => (
-              <div key={e.role} className="relative pl-12 md:pl-16">
+            {experience.map((e, i) => (
+              <Reveal key={e.role} variant="left" delay={i * 120} className="relative pl-12 md:pl-16">
                 <span className="absolute left-2 top-6 w-5 h-5 rounded-full bg-gradient-accent ring-4 ring-background md:left-4" />
                 <Card className="p-6 shadow-card border-border bg-card hover:shadow-soft transition-all">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
@@ -332,7 +336,7 @@ const Index = () => {
                   </div>
                   <p className="text-muted-foreground leading-relaxed">{e.desc}</p>
                 </Card>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -341,15 +345,15 @@ const Index = () => {
       {/* Certificates */}
       <section id="certificates" className="py-20 bg-secondary/40">
         <div className="container">
-          <div className="max-w-2xl mb-14">
+          <Reveal variant="up" className="max-w-2xl mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Achievements</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Sertifikat & Penghargaan</h2>
             <p className="text-muted-foreground">Beberapa pencapaian dan sertifikasi yang saya raih selama proses belajar.</p>
-          </div>
+          </Reveal>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {certificates.map(c => (
+            {certificates.map((c, i) => (
+              <Reveal key={c.title} variant="up" delay={i * 100}>
               <Card
-                key={c.title}
                 className={`group p-6 shadow-card border-border bg-card hover:-translate-y-1 hover:shadow-soft transition-all duration-300 relative overflow-hidden ${c.highlight ? "ring-2 ring-accent/40" : ""}`}
               >
                 {c.highlight && (
@@ -365,6 +369,7 @@ const Index = () => {
                 <p className="text-primary text-sm font-medium mb-2">{c.org}</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
               </Card>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -372,7 +377,7 @@ const Index = () => {
 
       {/* Contact */}
       <section id="contact" className="py-20 md:py-28 bg-gradient-hero">
-        <div className="container max-w-3xl text-center">
+        <Reveal variant="up" className="container max-w-3xl text-center">
           <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Get in Touch</p>
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-5">Mari Terhubung</h2>
           <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
@@ -383,7 +388,7 @@ const Index = () => {
             <ContactCard icon={Github} label="GitHub" value="@brahmantara" href="https://github.com" />
             <ContactCard icon={Linkedin} label="LinkedIn" value="Brahmantara P.W." href="https://linkedin.com" />
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <footer className="border-t border-border py-8">
