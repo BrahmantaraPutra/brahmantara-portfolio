@@ -20,18 +20,18 @@ const skills = [
 
 // User akan menambahkan image sendiri ke /public/tech/<file>.png — fallback pakai placeholder.
 const techStack = [
-  { name: "Kotlin", category: "Mobile", img: "/tech/kotlin.png" },
-  { name: "Flutter", category: "Mobile", img: "/tech/flutter.png" },
-  { name: "Dart", category: "Language", img: "/tech/dart.png" },
-  { name: "Jetpack Compose", category: "Mobile UI", img: "/tech/compose.png" },
-  { name: "Avalonia", category: "Desktop", img: "/tech/avalonia.png" },
-  { name: "Tauri", category: "Desktop", img: "/tech/tauri.png" },
-  { name: "C# / .NET", category: "Language", img: "/tech/csharp.png" },
-  { name: "Rust", category: "Language", img: "/tech/rust.png" },
-  { name: "Firebase", category: "Backend", img: "/tech/firebase.png" },
-  { name: "SQLite", category: "Database", img: "/tech/sqlite.png" },
-  { name: "Git", category: "Tools", img: "/tech/git.png" },
-  { name: "Figma", category: "Design", img: "/tech/figma.png" },
+  { name: "Kotlin", category: "Mobile", img: "/tech/kotlin.svg" },
+  { name: "Flutter", category: "Mobile", img: "/tech/flutter.svg" },
+  { name: "Dart", category: "Language", img: "/tech/dart.svg" },
+  { name: "Jetpack Compose", category: "Mobile UI", img: "/tech/compose.svg" },
+  { name: "Avalonia", category: "Desktop", img: "/tech/avalonia.svg" },
+  { name: "Tauri", category: "Desktop", img: "/tech/tauri.svg" },
+  { name: "C# / .NET", category: "Language", img: "/tech/csharp.svg" },
+  { name: "Rust", category: "Language", img: "/tech/rust.svg" },
+  { name: "Firebase", category: "Backend", img: "/tech/firebase.svg" },
+  { name: "SQLite", category: "Database", img: "/tech/sqlite.svg" },
+  { name: "Git", category: "Tools", img: "/tech/git.svg" },
+  { name: "Figma", category: "Design", img: "/tech/figma.svg" },
 ];
 
 const projects = [
@@ -163,23 +163,15 @@ const Index = () => {
           </div>
 
           <div className="md:col-span-2 relative animate-scale-in">
-            <div className="absolute -inset-6 bg-gradient-accent opacity-25 blur-3xl rounded-full" />
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-tr from-primary via-accent to-primary rounded-3xl opacity-60 blur-sm group-hover:opacity-100 transition-opacity" />
+            <div className="relative mx-auto w-fit">
+              <div className="absolute -inset-4 bg-accent/15 blur-2xl rounded-full" />
               <img
                 src={heroImg}
                 alt="Foto profil Brahmantara Putra Wirabhakti"
-                width={1024}
-                height={1024}
-                className="relative rounded-3xl shadow-soft w-full max-w-sm mx-auto transition-transform duration-500 group-hover:scale-[1.02]"
+                width={320}
+                height={320}
+                className="relative w-56 h-56 md:w-64 md:h-64 rounded-full object-cover border-4 border-card shadow-soft mx-auto"
               />
-              <div className="absolute -bottom-4 -left-4 bg-card border border-border rounded-2xl shadow-soft px-4 py-3 flex items-center gap-3 animate-fade-in">
-                <div className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-                <div className="text-xs">
-                  <div className="font-semibold">Currently Building</div>
-                  <div className="text-muted-foreground">Mobile & Desktop apps</div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -430,8 +422,8 @@ const FloatingDock = ({ dark, toggleTheme }: { dark: boolean; toggleTheme: () =>
     { icon: Instagram, label: "Instagram", href: "https://instagram.com" },
   ];
   return (
-    <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 animate-fade-in">
-      <div className="flex items-center gap-1 p-1.5 rounded-full bg-card/90 backdrop-blur-md border border-border shadow-soft">
+    <div className="fixed bottom-5 inset-x-0 z-50 flex justify-center pointer-events-none animate-fade-in">
+      <div className="pointer-events-auto flex items-center gap-1 p-1.5 rounded-full bg-card/90 backdrop-blur-md border border-border shadow-soft">
         {items.map(it => (
           <a
             key={it.label}
