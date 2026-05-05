@@ -506,7 +506,7 @@ const FloatingDock = ({ dark, toggleTheme }: { dark: boolean; toggleTheme: () =>
             rel="noopener noreferrer"
             aria-label={it.label}
             title={it.label}
-            className="group relative w-11 h-11 rounded-full flex items-center justify-center text-muted-foreground hover:text-accent-foreground hover:bg-accent transition-all duration-300 hover:scale-110"
+            className="group relative w-11 h-11 rounded-full flex items-center justify-center text-muted-foreground hover:text-accent-foreground hover:bg-accent transition-all duration-300 hover:scale-110 active:scale-90"
           >
             <it.icon className="h-[18px] w-[18px]" />
           </a>
@@ -516,7 +516,7 @@ const FloatingDock = ({ dark, toggleTheme }: { dark: boolean; toggleTheme: () =>
           onClick={toggleTheme}
           aria-label="Toggle theme"
           title={dark ? "Mode terang" : "Mode gelap"}
-          className="group relative w-11 h-11 rounded-full flex items-center justify-center text-muted-foreground hover:text-accent-foreground hover:bg-accent transition-all duration-300 hover:scale-110"
+          className="group relative w-11 h-11 rounded-full flex items-center justify-center text-muted-foreground hover:text-accent-foreground hover:bg-accent transition-all duration-300 hover:scale-110 active:scale-90 active:rotate-12"
         >
           {dark ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
         </button>
