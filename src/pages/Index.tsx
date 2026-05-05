@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import heroImg from "@/assets/hero-portrait.jpg";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useReveal, useScrollProgress, useActiveSection } from "@/hooks/use-reveal";
+import { cn } from "@/lib/utils";
 import {
   Smartphone, Monitor, Code2, Github, Mail, Linkedin, MapPin,
   Rocket, Layers, Zap, Database, GitBranch, Wrench, ArrowRight, ExternalLink, Calendar, Sparkles, Image as ImageIcon,
