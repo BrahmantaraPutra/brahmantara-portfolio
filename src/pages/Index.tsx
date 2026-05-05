@@ -195,14 +195,14 @@ const Index = () => {
           </div>
 
           <div className="md:col-span-2 relative animate-scale-in">
-            <div className="relative mx-auto w-fit">
-              <div className="absolute -inset-4 bg-accent/15 blur-2xl rounded-full" />
+            <div className="relative mx-auto w-fit animate-float">
+              <div className="absolute -inset-4 bg-accent/15 blur-2xl rounded-full animate-[pulse_5s_ease-in-out_infinite]" />
               <img
                 src={heroImg}
                 alt="Foto profil Brahmantara Putra Wirabhakti"
                 width={320}
                 height={320}
-                className="relative w-56 h-56 md:w-64 md:h-64 rounded-full object-cover border-4 border-card shadow-soft mx-auto"
+                className="relative w-56 h-56 md:w-64 md:h-64 rounded-full object-cover border-4 border-card shadow-soft mx-auto transition-transform duration-500 hover:scale-105"
               />
             </div>
           </div>
