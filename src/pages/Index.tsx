@@ -75,6 +75,10 @@ const certificates = [
 
 const Index = () => {
   const [dark, setDark] = useState(false);
+  const scrollProgress = useScrollProgress();
+  const navItems = ["About", "Tech", "Skills", "Projects", "Certificates", "Experience", "Contact"];
+  const active = useActiveSection(["home", ...navItems.map(i => i.toLowerCase())]);
+
   useEffect(() => {
     document.title = "Brahmantara Putra Wirabhakti — Portfolio";
   }, []);
@@ -106,18 +110,44 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground font-sans pb-28">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
+      {/* Scroll progress bar */}
+      <div
+        aria-hidden
+        className="fixed top-0 left-0 right-0 z-[60] h-[3px] bg-transparent pointer-events-none"
+      >
+        <div
+          className="h-full bg-gradient-accent shadow-[0_0_12px_hsl(var(--accent)/0.6)] transition-[width] duration-150 ease-out"
+          style={{ width: `${scrollProgress * 100}%` }}
+        />
+      </div>
+
       {/* Nav */}
       <header className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border">
         <nav className="container flex items-center justify-between h-16">
           <a href="#home" className="font-display font-bold text-lg tracking-tight">
             Brahmantara<span className="text-accent">.</span>
           </a>
-          <ul className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-            {["About", "Tech", "Skills", "Projects", "Certificates", "Experience", "Contact"].map(i => (
-              <li key={i}>
-                <a href={`#${i.toLowerCase()}`} className="story-link hover:text-foreground transition-colors">{i}</a>
-              </li>
-            ))}
+          <ul className="hidden md:flex items-center gap-1 text-sm font-medium text-muted-foreground">
+            {navItems.map(i => {
+              const id = i.toLowerCase();
+              const isActive = active === id;
+              return (
+                <li key={i}>
+                  <a
+                    href={`#${id}`}
+                    className={cn(
+                      "relative px-3 py-2 rounded-full transition-all duration-300 hover:text-foreground active:scale-95",
+                      isActive && "text-foreground",
+                    )}
+                  >
+                    <span className="relative z-10">{i}</span>
+                    {isActive && (
+                      <span className="absolute inset-0 rounded-full bg-accent/15 ring-1 ring-accent/30 animate-scale-in" />
+                    )}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
           <Badge variant="outline" className="hidden sm:flex gap-1.5 rounded-full">
             <Sparkles className="h-3 w-3 text-accent" /> Portfolio
