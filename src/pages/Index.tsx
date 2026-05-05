@@ -164,13 +164,13 @@ const Index = () => {
         <div className="container relative grid md:grid-cols-5 gap-12 items-center py-24 md:py-32">
           <div className="md:col-span-3 space-y-6 animate-fade-in">
             <Badge variant="secondary" className="rounded-full px-4 py-1.5 font-medium">
-              <span className="w-2 h-2 rounded-full bg-accent mr-2 animate-pulse" /> Siswa SMK · Mencari Tempat Magang
+              <span className="w-2 h-2 rounded-full bg-accent mr-2 animate-pulse" /> Siswa · SMK NEGERI 2 YOGYAKARTA 
             </Badge>
             <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
               Halo, saya{" "}
               <span className="relative inline-block">
                 <span className="relative z-10 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  Brahmantara
+                  Brahmantara Putra
                 </span>
                 <span className="absolute inset-x-0 bottom-1 h-3 bg-accent/20 -z-0" />
               </span>
@@ -226,7 +226,7 @@ const Index = () => {
               </p>
               <div className="grid grid-cols-3 gap-6 pt-6">
                 <Stat value="10+" label="Project belajar" />
-                <Stat value="3+" label="Tahun ngoding" />
+                <Stat value="3+" label="Tahun belajar" />
                 <Stat value="12+" label="Teknologi dipelajari" />
               </div>
             </Reveal>
@@ -240,7 +240,7 @@ const Index = () => {
           <Reveal variant="up" className="text-center max-w-2xl mx-auto mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Tech Stack</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Teknologi yang Saya Gunakan</h2>
-            <p className="text-muted-foreground">Sekumpulan tools, bahasa, dan framework yang menjadi keseharian saya dalam membangun produk.</p>
+            <p className="text-muted-foreground">Sekumpulan tools, bahasa, dan framework yang menjadi keseharian saya dalam membangun aplikasi.</p>
           </Reveal>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
