@@ -10,6 +10,7 @@ import {
   Rocket, Layers, Zap, Database, GitBranch, Wrench, ArrowRight, ExternalLink, Calendar, Sparkles, Image as ImageIcon,
   Award, Trophy, GraduationCap, Instagram, Sun, Moon, BookOpen
 } from "lucide-react";
+import { link } from "fs";
 
 const skills = [
   { icon: Smartphone, name: "Kotlin (Android)", level: "Expert", desc: "Native Android development dengan Jetpack Compose, MVVM, dan Coroutines." },
@@ -41,25 +42,29 @@ const projects = [
     title: "SmithOrigin", 
     stack: ["Avalonia UI", "C#", ".NET 10", "Tauri"], 
     desc: "Aplikasi desktop cross-platform yang berfokus pada efisiensi performa, dikembangkan dari WinForms menuju arsitektur Avalonia modern.", 
-    year: "2026" 
+    year: "2026",
+    link: "https://github.com/BrahmantaraPutra/SmithOrigin"
   },
   { 
     title: "Esemka Management System", 
     stack: ["C#", "SQL Server", "WinForms"], 
     desc: "Simulasi modul kompetisi LKS ITSSB untuk manajemen operasional bisnis dengan integrasi basis data relasional yang kompleks.", 
-    year: "2026" 
+    year: "2026", 
+    link: "https://github.com/BrahmantaraPutra/RestoSMK"
   },
   { 
     title: "Ezemkofe (Mobile)", 
     stack: ["Kotlin", "Jetpack Compose", "Retrofit"], 
     desc: "Aplikasi Android native untuk manajemen inventaris dan transaksi sebuah kafe, menggunakan arsitektur MVVM dan integrasi REST API.", 
-    year: "2026" 
+    year: "2026",
+    link: "https://github.com/BrahmantaraPutra/TugasAkhir_EzemKofie"
   },
   { 
     title: "Ecopedia", 
     stack: ["React", "Supabase", "Typescript"], 
     desc: "Website untuk mengelola, mengatur, dan mendistribusikan aktivitas peduli lingkungan masyarakat dengan sebuah organisasi.", 
-    year: "2025" 
+    year: "2025",
+    link: "https://github.com/kaound3rage/EchoPediaFiks"
   },
 ];
 
