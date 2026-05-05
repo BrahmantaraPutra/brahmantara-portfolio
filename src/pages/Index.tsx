@@ -3,6 +3,8 @@ import heroImg from "@/assets/hero-portrait.jpg";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useReveal, useScrollProgress, useActiveSection } from "@/hooks/use-reveal";
+import { cn } from "@/lib/utils";
 import {
   Smartphone, Monitor, Code2, Github, Mail, Linkedin, MapPin,
   Rocket, Layers, Zap, Database, GitBranch, Wrench, ArrowRight, ExternalLink, Calendar, Sparkles, Image as ImageIcon,
@@ -73,6 +75,10 @@ const certificates = [
 
 const Index = () => {
   const [dark, setDark] = useState(false);
+  const scrollProgress = useScrollProgress();
+  const navItems = ["About", "Tech", "Skills", "Projects", "Certificates", "Experience", "Contact"];
+  const active = useActiveSection(["home", ...navItems.map(i => i.toLowerCase())]);
+
   useEffect(() => {
     document.title = "Brahmantara Putra Wirabhakti — Portfolio";
   }, []);
@@ -104,18 +110,44 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground font-sans pb-28">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
+      {/* Scroll progress bar */}
+      <div
+        aria-hidden
+        className="fixed top-0 left-0 right-0 z-[60] h-[3px] bg-transparent pointer-events-none"
+      >
+        <div
+          className="h-full bg-gradient-accent shadow-[0_0_12px_hsl(var(--accent)/0.6)] transition-[width] duration-150 ease-out"
+          style={{ width: `${scrollProgress * 100}%` }}
+        />
+      </div>
+
       {/* Nav */}
       <header className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border">
         <nav className="container flex items-center justify-between h-16">
           <a href="#home" className="font-display font-bold text-lg tracking-tight">
             Brahmantara<span className="text-accent">.</span>
           </a>
-          <ul className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
-            {["About", "Tech", "Skills", "Projects", "Certificates", "Experience", "Contact"].map(i => (
-              <li key={i}>
-                <a href={`#${i.toLowerCase()}`} className="story-link hover:text-foreground transition-colors">{i}</a>
-              </li>
-            ))}
+          <ul className="hidden md:flex items-center gap-1 text-sm font-medium text-muted-foreground">
+            {navItems.map(i => {
+              const id = i.toLowerCase();
+              const isActive = active === id;
+              return (
+                <li key={i}>
+                  <a
+                    href={`#${id}`}
+                    className={cn(
+                      "relative px-3 py-2 rounded-full transition-all duration-300 hover:text-foreground active:scale-95",
+                      isActive && "text-foreground",
+                    )}
+                  >
+                    <span className="relative z-10">{i}</span>
+                    {isActive && (
+                      <span className="absolute inset-0 rounded-full bg-accent/15 ring-1 ring-accent/30 animate-scale-in" />
+                    )}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
           <Badge variant="outline" className="hidden sm:flex gap-1.5 rounded-full">
             <Sparkles className="h-3 w-3 text-accent" /> Portfolio
@@ -163,14 +195,14 @@ const Index = () => {
           </div>
 
           <div className="md:col-span-2 relative animate-scale-in">
-            <div className="relative mx-auto w-fit">
-              <div className="absolute -inset-4 bg-accent/15 blur-2xl rounded-full" />
+            <div className="relative mx-auto w-fit animate-float">
+              <div className="absolute -inset-4 bg-accent/15 blur-2xl rounded-full animate-[pulse_5s_ease-in-out_infinite]" />
               <img
                 src={heroImg}
                 alt="Foto profil Brahmantara Putra Wirabhakti"
                 width={320}
                 height={320}
-                className="relative w-56 h-56 md:w-64 md:h-64 rounded-full object-cover border-4 border-card shadow-soft mx-auto"
+                className="relative w-56 h-56 md:w-64 md:h-64 rounded-full object-cover border-4 border-card shadow-soft mx-auto transition-transform duration-500 hover:scale-105"
               />
             </div>
           </div>
@@ -181,11 +213,11 @@ const Index = () => {
       <section id="about" className="py-20 md:py-28">
         <div className="container max-w-5xl">
           <div className="grid md:grid-cols-3 gap-12">
-            <div>
+            <Reveal variant="left">
               <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">About</p>
               <h2 className="font-display text-3xl md:text-4xl font-bold">Tentang Saya</h2>
-            </div>
-            <div className="md:col-span-2 space-y-4 text-muted-foreground leading-relaxed">
+            </Reveal>
+            <Reveal variant="right" delay={120} className="md:col-span-2 space-y-4 text-muted-foreground leading-relaxed">
               <p>
                 Saya seorang <strong className="text-foreground">siswa SMK</strong> jurusan IT yang antusias pada dunia pengembangan aplikasi <strong className="text-foreground">mobile dan desktop</strong>. Saya banyak belajar secara mandiri sambil mengikuti berbagai kompetensi dan kompetisi di sekolah.
               </p>
@@ -197,7 +229,7 @@ const Index = () => {
                 <Stat value="3+" label="Tahun ngoding" />
                 <Stat value="12+" label="Teknologi dipelajari" />
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -205,11 +237,11 @@ const Index = () => {
       {/* TECH STACK */}
       <section id="tech" className="py-20 bg-secondary/40 relative overflow-hidden">
         <div className="container">
-          <div className="text-center max-w-2xl mx-auto mb-14">
+          <Reveal variant="up" className="text-center max-w-2xl mx-auto mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Tech Stack</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Teknologi yang Saya Gunakan</h2>
             <p className="text-muted-foreground">Sekumpulan tools, bahasa, dan framework yang menjadi keseharian saya dalam membangun produk.</p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
             {techStack.map((t, i) => (
@@ -222,16 +254,17 @@ const Index = () => {
       {/* Skills */}
       <section id="skills" className="py-20 md:py-28">
         <div className="container">
-          <div className="max-w-2xl mb-14">
+          <Reveal variant="up" className="max-w-2xl mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Skills</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Keahlian Teknis</h2>
             <p className="text-muted-foreground">Bidang keahlian utama dengan tingkat penguasaan masing-masing.</p>
-          </div>
+          </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {skills.map(s => (
-              <Card key={s.name} className="group p-6 shadow-card border-border bg-card hover:-translate-y-1 hover:shadow-soft transition-all duration-300 cursor-default">
+            {skills.map((s, i) => (
+              <Reveal key={s.name} variant="up" delay={i * 80}>
+              <Card className="group p-6 shadow-card border-border bg-card hover:-translate-y-1 hover:shadow-soft transition-all duration-300 cursor-default">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-11 h-11 rounded-lg bg-accent/10 text-accent flex items-center justify-center group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
+                  <div className="w-11 h-11 rounded-lg bg-accent/10 text-accent flex items-center justify-center group-hover:bg-accent group-hover:text-accent-foreground group-hover:rotate-6 transition-all duration-300">
                     <s.icon className="h-5 w-5" />
                   </div>
                   <Badge variant="outline" className="text-xs">{s.level}</Badge>
@@ -239,6 +272,7 @@ const Index = () => {
                 <h3 className="font-display font-semibold text-lg mb-1.5">{s.name}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
               </Card>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -247,16 +281,17 @@ const Index = () => {
       {/* Projects */}
       <section id="projects" className="py-20 bg-secondary/40">
         <div className="container">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+          <Reveal variant="up" className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
             <div className="max-w-2xl">
               <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Selected Work</p>
               <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Project Pilihan</h2>
               <p className="text-muted-foreground">Beberapa karya yang merepresentasikan keahlian dan pendekatan kerja saya.</p>
             </div>
-          </div>
+          </Reveal>
           <div className="grid md:grid-cols-2 gap-6">
-            {projects.map(p => (
-              <Card key={p.title} className="p-7 shadow-card hover:shadow-soft transition-all duration-300 border-border bg-card group hover:-translate-y-1">
+            {projects.map((p, i) => (
+              <Reveal key={p.title} variant={i % 2 === 0 ? "left" : "right"} delay={i * 100}>
+              <Card className="p-7 shadow-card hover:shadow-soft transition-all duration-300 border-border bg-card group hover:-translate-y-1">
                 <div className="flex items-start justify-between mb-4">
                   <div className="w-12 h-12 rounded-xl bg-gradient-accent flex items-center justify-center text-primary-foreground group-hover:scale-110 transition-transform">
                     <Rocket className="h-5 w-5" />
@@ -274,6 +309,7 @@ const Index = () => {
                   Lihat detail <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
                 </a>
               </Card>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -282,13 +318,13 @@ const Index = () => {
       {/* Experience */}
       <section id="experience" className="py-20 md:py-28">
         <div className="container max-w-4xl">
-          <div className="mb-14">
+          <Reveal variant="up" className="mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Experience</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold">Pengalaman & Pendidikan</h2>
-          </div>
+          </Reveal>
           <div className="relative space-y-6 before:absolute before:left-4 before:top-2 before:bottom-2 before:w-px before:bg-border md:before:left-6">
-            {experience.map(e => (
-              <div key={e.role} className="relative pl-12 md:pl-16">
+            {experience.map((e, i) => (
+              <Reveal key={e.role} variant="left" delay={i * 120} className="relative pl-12 md:pl-16">
                 <span className="absolute left-2 top-6 w-5 h-5 rounded-full bg-gradient-accent ring-4 ring-background md:left-4" />
                 <Card className="p-6 shadow-card border-border bg-card hover:shadow-soft transition-all">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
@@ -300,7 +336,7 @@ const Index = () => {
                   </div>
                   <p className="text-muted-foreground leading-relaxed">{e.desc}</p>
                 </Card>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -309,15 +345,15 @@ const Index = () => {
       {/* Certificates */}
       <section id="certificates" className="py-20 bg-secondary/40">
         <div className="container">
-          <div className="max-w-2xl mb-14">
+          <Reveal variant="up" className="max-w-2xl mb-14">
             <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Achievements</p>
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Sertifikat & Penghargaan</h2>
             <p className="text-muted-foreground">Beberapa pencapaian dan sertifikasi yang saya raih selama proses belajar.</p>
-          </div>
+          </Reveal>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {certificates.map(c => (
+            {certificates.map((c, i) => (
+              <Reveal key={c.title} variant="up" delay={i * 100}>
               <Card
-                key={c.title}
                 className={`group p-6 shadow-card border-border bg-card hover:-translate-y-1 hover:shadow-soft transition-all duration-300 relative overflow-hidden ${c.highlight ? "ring-2 ring-accent/40" : ""}`}
               >
                 {c.highlight && (
@@ -333,6 +369,7 @@ const Index = () => {
                 <p className="text-primary text-sm font-medium mb-2">{c.org}</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
               </Card>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -340,7 +377,7 @@ const Index = () => {
 
       {/* Contact */}
       <section id="contact" className="py-20 md:py-28 bg-gradient-hero">
-        <div className="container max-w-3xl text-center">
+        <Reveal variant="up" className="container max-w-3xl text-center">
           <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Get in Touch</p>
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-5">Mari Terhubung</h2>
           <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
@@ -351,7 +388,7 @@ const Index = () => {
             <ContactCard icon={Github} label="GitHub" value="@brahmantara" href="https://github.com" />
             <ContactCard icon={Linkedin} label="LinkedIn" value="Brahmantara P.W." href="https://linkedin.com" />
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <footer className="border-t border-border py-8">
@@ -373,6 +410,43 @@ const Stat = ({ value, label }: { value: string; label: string }) => (
     <div className="text-xs text-muted-foreground mt-1">{label}</div>
   </div>
 );
+
+type RevealVariant = "up" | "left" | "right" | "fade";
+
+const Reveal = ({
+  children,
+  variant = "up",
+  delay = 0,
+  className,
+  as: As = "div",
+}: {
+  children: React.ReactNode;
+  variant?: RevealVariant;
+  delay?: number;
+  className?: string;
+  as?: any;
+}) => {
+  const { ref, visible } = useReveal<HTMLDivElement>();
+  const animMap: Record<RevealVariant, string> = {
+    up: "animate-slide-up",
+    left: "animate-slide-in-left",
+    right: "animate-slide-in-right",
+    fade: "animate-fade-in",
+  };
+  return (
+    <As
+      ref={ref}
+      style={{ animationDelay: visible ? `${delay}ms` : undefined }}
+      className={cn(
+        "transition-opacity",
+        visible ? animMap[variant] : "opacity-0",
+        className,
+      )}
+    >
+      {children}
+    </As>
+  );
+};
 
 const ContactCard = ({ icon: Icon, label, value, href }: any) => (
   <a href={href} target="_blank" rel="noopener noreferrer"
@@ -432,7 +506,7 @@ const FloatingDock = ({ dark, toggleTheme }: { dark: boolean; toggleTheme: () =>
             rel="noopener noreferrer"
             aria-label={it.label}
             title={it.label}
-            className="group relative w-11 h-11 rounded-full flex items-center justify-center text-muted-foreground hover:text-accent-foreground hover:bg-accent transition-all duration-300 hover:scale-110"
+            className="group relative w-11 h-11 rounded-full flex items-center justify-center text-muted-foreground hover:text-accent-foreground hover:bg-accent transition-all duration-300 hover:scale-110 active:scale-90"
           >
             <it.icon className="h-[18px] w-[18px]" />
           </a>
@@ -442,7 +516,7 @@ const FloatingDock = ({ dark, toggleTheme }: { dark: boolean; toggleTheme: () =>
           onClick={toggleTheme}
           aria-label="Toggle theme"
           title={dark ? "Mode terang" : "Mode gelap"}
-          className="group relative w-11 h-11 rounded-full flex items-center justify-center text-muted-foreground hover:text-accent-foreground hover:bg-accent transition-all duration-300 hover:scale-110"
+          className="group relative w-11 h-11 rounded-full flex items-center justify-center text-muted-foreground hover:text-accent-foreground hover:bg-accent transition-all duration-300 hover:scale-110 active:scale-90 active:rotate-12"
         >
           {dark ? <Sun className="h-[18px] w-[18px]" /> : <Moon className="h-[18px] w-[18px]" />}
         </button>
