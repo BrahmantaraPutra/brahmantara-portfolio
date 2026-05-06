@@ -83,7 +83,7 @@ const certificates = [
   },
   {
     icon: Award,
-    title: "Finalis Tecnoversary - EcoDigital for Environment",
+    title: "Tecnoversary - EcoDigital for Environment",
     org: "Web Design",
     year: "2025",
     desc: "Menjadi finalis dalam lomba membangun dan mendesain sebuah webite bertema edukasi lingkungan.",
