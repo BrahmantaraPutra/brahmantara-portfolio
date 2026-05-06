@@ -64,7 +64,7 @@ const projects = [
     stack: ["React", "Supabase", "Typescript"], 
     desc: "Website untuk mengelola, mengatur, dan mendistribusikan aktivitas peduli lingkungan masyarakat dengan sebuah organisasi.", 
     year: "2025",
-    link: "https://github.com/kaound3rage/EchoPediaFiks"
+    link: "https://github.com/BrahmantaraPutra/webdesign_Ijazah-Aslinya-Mana-Wi_diesnatalis25"
   },
 ];
 
