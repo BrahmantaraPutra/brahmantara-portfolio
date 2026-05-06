@@ -69,7 +69,7 @@ const projects = [
 ];
 
 const experience = [
-  { role: "SMK NEGERI 2 YOGYAKARTA", org: "Sistem Informasi Jaringan dan Aplikasi", period: "2023 — Sekarang", desc: "Membangun beragam aplikasi mobile dan desktop untuk klien lokal dan internasional dengan fokus pada UX dan performa." },
+  { role: "SMK NEGERI 2 YOGYAKARTA", org: "Sistem Informasi Jaringan dan Aplikasi", period: "2023 — Sekarang", desc: "Membangun beragam aplikasi mobile, web dan desktop untuk projek pribadi dan klien lokal dengan fokus pada UX dan performa." },
 ];
 
 const certificates = [
@@ -83,17 +83,17 @@ const certificates = [
   },
   {
     icon: Award,
-    title: "Finalis Lomba PMB UNIKU",
+    title: "Finalis Tecnoversary - EcoDigital for Environment",
     org: "Web Design",
     year: "2025",
-    desc: "Menjadi finalis dalam lomba mmebangun dan mendesain sebuah webite bertema peduli lingkungan.",
+    desc: "Menjadi finalis dalam lomba membangun dan mendesain sebuah webite bertema edukasi lingkungan.",
   },
   {
     icon: BookOpen,
     title: "MTCNA",
     org: "Online Course",
     year: "2025",
-    desc: "sertifikasi resmi dari MikroTik untuk mengkonfigurasi, mengelola, dan menggunakan MikroTik RouterOS",
+    desc: "Sertifikasi resmi dari MikroTik untuk mengkonfigurasi, mengelola, dan menggunakan MikroTik RouterOS",
   },
 ];
 
@@ -214,7 +214,7 @@ const Index = () => {
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-6 text-sm text-muted-foreground">
               <span className="flex items-center gap-2"><GraduationCap className="h-4 w-4" /> Siswa SMK</span>
               <span className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Indonesia</span>
-              <span className="flex items-center gap-2"><Code2 className="h-4 w-4" /> Mobile · Desktop</span>
+              <span className="flex items-center gap-2"><Code2 className="h-4 w-4" /> Mobile · Desktop · Website</span>
             </div>
           </div>
 
@@ -308,7 +308,7 @@ const Index = () => {
           <Reveal variant="up" className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
             <div className="max-w-2xl">
               <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Selected Work</p>
-              <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Pengalaman Project</h2>
+              <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">Pengalaman Projek</h2>
               <p className="text-muted-foreground">Beberapa karya yang merepresentasikan keahlian dan pendekatan kerja saya.</p>
             </div>
           </Reveal>
@@ -405,7 +405,7 @@ const Index = () => {
           <p className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">Get in Touch</p>
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-5">Mari Terhubung</h2>
           <p className="text-muted-foreground text-lg mb-10 max-w-xl mx-auto">
-            Tertarik berdiskusi soal teknologi mobile, desktop, atau sekadar menyapa? Jangan ragu untuk menghubungi saya melalui kanal di bawah.
+            Tertarik berdiskusi soal teknologi mobile, desktop, website, atau sekadar menyapa? Jangan ragu untuk menghubungi saya melalui kanal di bawah.
           </p>
           <div className="grid sm:grid-cols-3 gap-4">
             <ContactCard icon={Mail} label="Email" value="brahmantaraputraw@gmail.com" href="mailto:brahmantaraputraw@gmail.com" />
