@@ -75,7 +75,7 @@ const experience = [
 const certificates = [
   {
     icon: Trophy,
-    title: "Juara 2 LKS Provinsi 2026",
+    title: "LKS Provinsi 2026",
     org: "IT Software Solution for Business",
     year: "2026",
     desc: "Meraih Juara 2 tingkat Provinsi dalam Lomba Kompetensi Siswa cabang IT Software Solution for Business.",
